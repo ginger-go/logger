@@ -9,6 +9,12 @@ import (
 	"github.com/ginger-go/ginger"
 )
 
+var logFolderPath = "./logs"
+
+func SetLogFolderPath(path string) {
+	logFolderPath = path
+}
+
 func Info(msg ...any) {
 	refreshFileLogger()
 	stdLogger.Println("[INFO]", msg)
@@ -53,7 +59,12 @@ func getStdLogger() *log.Logger {
 }
 
 func getFileLogger(filename string) *log.Logger {
-	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
+	err := os.MkdirAll(logFolderPath, 0755)
+	if err != nil {
+		log.Fatalf("error creating log folder: %v", err)
+	}
+	path := logFolderPath + "/" + filename
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
 	}
