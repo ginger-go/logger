@@ -32,7 +32,7 @@ func Err(msg ...any) {
 }
 
 func Debug(msg ...any) {
-	if env.GetEnv("GIN_MODE", "") != ginger.GIN_MODE_RELEASE {
+	if env.String("GIN_MODE", "") != ginger.GIN_MODE_RELEASE {
 		stdLogger.Println("[DEBUG]", msg)
 	}
 }

@@ -3,7 +3,7 @@ module github.com/ginger-go/logger
 go 1.20
 
 require (
-	github.com/ginger-go/env v1.0.0
+	github.com/ginger-go/env v1.1.0
 	github.com/ginger-go/ginger v1.0.3
 )
 
